@@ -2,7 +2,7 @@
   "name": "scroll-monitor",
   "version": "1.0.0",
   "author": "Ilya Medvedev <ilya@medvedev.im>",
-  "description": "Scroll event monitor for debug purposes",
+  "description": "Scroll event monitor for debugging purposes",
   "repository": "https://github.com/iam-medvedev/scroll-monitor.git",
   "homepage": "https://github.com/iam-medvedev/scroll-monitor#readme",
   "bugs": "https://github.com/iam-medvedev/scroll-monitor/issues",

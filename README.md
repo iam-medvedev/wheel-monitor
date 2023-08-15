@@ -2,7 +2,7 @@
 
 <img width="140" src="./demo/demo.gif" />
 
-The Scroll Monitor is a TypeScript class that creates a visual representation of scroll activity for debug purposes.
+The Scroll Monitor is a TypeScript class that creates a visual representation of scroll activity for debugging purposes..
 
 It provides an easy way to monitor and visualize scroll events on a webpage.
 

@@ -23,7 +23,9 @@
     </div>
     <script type="module">
       import { ScrollMonitor } from '../src';
-      new ScrollMonitor();
+      const mon = new ScrollMonitor({
+        axis: 'y',
+      });
     </script>
   </body>
 </html>

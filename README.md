@@ -1,5 +1,7 @@
 # Scroll Monitor
 
+<img width="140" src="./demo/demo.gif" />
+
 The Scroll Monitor is a TypeScript class that creates a visual representation of scroll activity for debug purposes.
 
 It provides an easy way to monitor and visualize scroll events on a webpage.
@@ -27,6 +29,7 @@ import { ScrollMonitor } from 'scroll-monitor';
 
 // Create an instance of ScrollMonitor with custom settings
 const monitor = new ScrollMonitor({
+  axis: 'y',
   height: 100,
   width: 200,
   color: '#0000cc',
@@ -37,12 +40,30 @@ const monitor = new ScrollMonitor({
 monitor.destroy();
 ```
 
+## Manual mode
+
+Ability to programmatically trigger a scroll event. For example, if you handle the scroll yourself.
+
+```ts
+import { ScrollMonitor } from 'scroll-monitor';
+
+const monitor = new ScrollMonitor({
+  manual: true,
+});
+
+window.addEventListener('wheel', (e) => {
+  monitor.trigger(e.deltaX);
+});
+```
+
 ## Options
 
 The ScrollMonitorSettings interface provides several options to customize the appearance and behavior of the monitor:
 
 | Option            | Description                                           | Default Value |
 | ----------------- | ----------------------------------------------------- | ------------- |
+| `axis`            | The scroll axis. Default is `y`                       | `x` or `y`    |
+| `manual`          | The `manual` mode flag                                | false         |
 | `height`          | The height of the canvas in pixels.                   | `100`         |
 | `width`           | The width of the canvas in pixels.                    | `200`         |
 | `color`           | The color of the scroll bar (CSS color value).        | `#0000cc`     |

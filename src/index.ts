@@ -1,5 +1,9 @@
 import { px } from './utils';
 
+const errorPrefix = '[scroll-monitor]:';
+
+type Axis = 'x' | 'y' | string;
+
 interface ScrollMonitorSettings {
   /** The height of the canvas. Default is `100px`. */
   height?: number;
@@ -9,6 +13,10 @@ interface ScrollMonitorSettings {
   color?: string;
   /** The background color of the canvas. Default is `#fff`. */
   backgroundColor?: string;
+  /** The `manual` mode flag. */
+  manual?: boolean;
+  /** The scroll axis. Default is `y` */
+  axis?: Axis;
 }
 
 export class ScrollMonitor {
@@ -17,9 +25,13 @@ export class ScrollMonitor {
   private centerY: number = 0;
   private barColor = '#0000cc';
   private lastX: number = 0;
+  private isManual = false;
+  private axis: Axis = 'y';
 
   constructor(settings: ScrollMonitorSettings = {}) {
     this.onWheel = this.onWheel.bind(this);
+    this.isManual = typeof settings.manual === 'boolean' ? settings.manual : false;
+    this.axis = settings.axis || 'y';
 
     // Create a canvas element, apply styles and settings
     this.canvas = document.createElement('canvas');
@@ -36,33 +48,34 @@ export class ScrollMonitor {
 
     const ctx = this.canvas.getContext('2d');
     if (!ctx) {
-      throw new Error('[scroll-monitor]: Cannot get canvas context');
+      throw new Error(`${errorPrefix} Cannot get canvas context`);
     }
     this.ctx = ctx;
 
-    // Bind event listeners during construction
-    this.bindEvents();
+    if (!this.isManual) {
+      // Bind event listeners
+      this.bindEvents();
+    }
   }
 
+  /**
+   * Binds internal events
+   */
   private bindEvents() {
     window.addEventListener('wheel', this.onWheel);
   }
 
+  /**
+   * Unbinds internal events
+   */
   private unbindEvents() {
     window.removeEventListener('wheel', this.onWheel);
-  }
-
-  private clear() {
-    this.lastX = 0;
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   /**
    * Draws a bar representing the scroll movement
    */
-  private onWheel(e: WheelEvent) {
-    const delta = e.deltaY;
-
+  private draw(delta: number) {
     // Draw the bar on the canvas
     this.ctx.fillStyle = this.barColor;
     this.ctx.fillRect(this.lastX, this.centerY, 2, -delta);
@@ -73,6 +86,39 @@ export class ScrollMonitor {
     }
   }
 
+  /**
+   * Internal `wheel` listener
+   */
+  private onWheel(e: WheelEvent) {
+    if (this.isManual) {
+      return;
+    }
+
+    const delta = this.axis === 'y' ? e.deltaY : e.deltaX;
+    this.draw(delta);
+  }
+
+  /**
+   * Clears canvas
+   */
+  private clear() {
+    this.lastX = 0;
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  /**
+   * Manual trigger. Work only if `settings.manual` is set to `true`.
+   */
+  public trigger(delta: number) {
+    if (!this.isManual) {
+      throw new Error(`${errorPrefix} 'trigger()' works only when 'manual' mode enabled.`);
+    }
+    this.draw(delta);
+  }
+
+  /**
+   * Destroys the instance
+   */
   public destroy() {
     this.unbindEvents();
     document.body.removeChild(this.canvas);

@@ -6308,26 +6308,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"scroll-monitor@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "scroll-monitor@workspace:."
-  dependencies:
-    "@semantic-release/changelog": 6.0.3
-    "@semantic-release/commit-analyzer": 10.0.1
-    "@semantic-release/github": 9.0.4
-    "@semantic-release/npm": 10.0.4
-    "@semantic-release/release-notes-generator": 11.0.4
-    "@types/node": ^20.4.9
-    parcel: ^2.9.3
-    prettier: ^3.0.1
-    rollup-plugin-uglify: ^6.0.4
-    semantic-release: ^21.0.7
-    typescript: ^5.1.6
-    vite: ^4.4.9
-    vite-plugin-dts: ^3.5.2
-  languageName: unknown
-  linkType: soft
-
 "semantic-release@npm:^21.0.7":
   version: 21.0.7
   resolution: "semantic-release@npm:21.0.7"
@@ -7262,6 +7242,26 @@ __metadata:
   checksum: 0fbe16839d193ed82ddb4fe331ca8cfaee2ecbd42596aa02366c708956cf41f7258f2d5411c3bc9aa099c26058dc47afbd2593d449718a18e4ef4d870c5ace18
   languageName: node
   linkType: hard
+
+"wheel-monitor@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "wheel-monitor@workspace:."
+  dependencies:
+    "@semantic-release/changelog": 6.0.3
+    "@semantic-release/commit-analyzer": 10.0.1
+    "@semantic-release/github": 9.0.4
+    "@semantic-release/npm": 10.0.4
+    "@semantic-release/release-notes-generator": 11.0.4
+    "@types/node": ^20.4.9
+    parcel: ^2.9.3
+    prettier: ^3.0.1
+    rollup-plugin-uglify: ^6.0.4
+    semantic-release: ^21.0.7
+    typescript: ^5.1.6
+    vite: ^4.4.9
+    vite-plugin-dts: ^3.5.2
+  languageName: unknown
+  linkType: soft
 
 "which@npm:^2.0.1, which@npm:^2.0.2":
   version: 2.0.2

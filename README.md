@@ -1,34 +1,34 @@
-# Scroll Monitor
+# Wheel Monitor
 
 <img width="140" src="./demo/demo.gif" />
 
-The Scroll Monitor is a TypeScript class that creates a visual representation of scroll activity for debugging purposes..
+The Wheel Monitor is a TypeScript class that creates a visual representation of scroll activity for debugging purposes..
 
 It provides an easy way to monitor and visualize scroll events on a webpage.
 
 ## Installation
 
-You can install the Scroll Monitor using your preferred package manager:
+You can install the Wheel Monitor using your preferred package manager:
 
 ```bash
-yarn add -D scroll-monitor
+yarn add -D wheel-monitor
 ```
 
 or
 
 ```bash
-npm install --save-dev scroll-monitor
+npm install --save-dev wheel-monitor
 ```
 
 ## Usage
 
-To use the Scroll Monitor, you need to import the `ScrollMonitor` class and create an instance:
+To use the Wheel Monitor, you need to import the `WheelMonitor` class and create an instance:
 
 ```ts
-import { ScrollMonitor } from 'scroll-monitor';
+import { WheelMonitor } from 'wheel-monitor';
 
-// Create an instance of ScrollMonitor with custom settings
-const monitor = new ScrollMonitor({
+// Create an instance of WheelMonitor with custom settings
+const monitor = new WheelMonitor({
   axis: 'y',
   height: 100,
   width: 200,
@@ -45,9 +45,9 @@ monitor.destroy();
 Ability to programmatically trigger a scroll event. For example, if you handle the scroll yourself.
 
 ```ts
-import { ScrollMonitor } from 'scroll-monitor';
+import { WheelMonitor } from 'wheel-monitor';
 
-const monitor = new ScrollMonitor({
+const monitor = new WheelMonitor({
   manual: true,
 });
 
@@ -58,7 +58,7 @@ window.addEventListener('wheel', (e) => {
 
 ## Options
 
-The ScrollMonitorSettings interface provides several options to customize the appearance and behavior of the monitor:
+The WheelMonitorSettings interface provides several options to customize the appearance and behavior of the monitor:
 
 | Option            | Description                                           | Default Value |
 | ----------------- | ----------------------------------------------------- | ------------- |

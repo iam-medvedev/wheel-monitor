@@ -12,7 +12,7 @@ export default defineConfig({
     outDir,
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'scroll-monitor',
+      name: 'wheel-monitor',
     },
     minify: 'esbuild',
     sourcemap: !isProduction,

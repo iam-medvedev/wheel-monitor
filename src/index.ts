@@ -1,10 +1,10 @@
 import { px } from './utils';
 
-const errorPrefix = '[scroll-monitor]:';
+const errorPrefix = '[wheel-monitor]:';
 
 type Axis = 'x' | 'y' | string;
 
-interface ScrollMonitorSettings {
+interface WheelMonitorSettings {
   /** The height of the canvas. Default is `100px`. */
   height?: number;
   /** The width of the canvas. Default is `200px`. */
@@ -19,7 +19,7 @@ interface ScrollMonitorSettings {
   axis?: Axis;
 }
 
-export class ScrollMonitor {
+export class WheelMonitor {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private centerY: number = 0;
@@ -28,7 +28,7 @@ export class ScrollMonitor {
   private isManual = false;
   private axis: Axis = 'y';
 
-  constructor(settings: ScrollMonitorSettings = {}) {
+  constructor(settings: WheelMonitorSettings = {}) {
     this.onWheel = this.onWheel.bind(this);
     this.isManual = typeof settings.manual === 'boolean' ? settings.manual : false;
     this.axis = settings.axis || 'y';
@@ -43,7 +43,7 @@ export class ScrollMonitor {
     this.canvas.width = settings.width || 200;
     this.canvas.height = settings.height || 100;
     this.centerY = Math.floor(this.canvas.height / 2);
-    this.canvas.classList.add('scroll-monitor');
+    this.canvas.classList.add('wheel-monitor');
     document.body.appendChild(this.canvas);
 
     const ctx = this.canvas.getContext('2d');

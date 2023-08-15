@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>scroll monitor demo</title>
+    <title>wheel monitor demo</title>
     <style>
       html,
       body {
@@ -22,8 +22,8 @@
       <h1>↑ scroll ↓</h1>
     </div>
     <script type="module">
-      import { ScrollMonitor } from '../src';
-      const mon = new ScrollMonitor({
+      import { WheelMonitor } from '../src';
+      const mon = new WheelMonitor({
         axis: 'y',
       });
     </script>

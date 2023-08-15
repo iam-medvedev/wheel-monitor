@@ -1,11 +1,11 @@
 {
-  "name": "scroll-monitor",
+  "name": "wheel-monitor",
   "version": "1.0.0",
   "author": "Ilya Medvedev <ilya@medvedev.im>",
   "description": "Scroll event monitor for debugging purposes",
-  "repository": "https://github.com/iam-medvedev/scroll-monitor.git",
-  "homepage": "https://github.com/iam-medvedev/scroll-monitor#readme",
-  "bugs": "https://github.com/iam-medvedev/scroll-monitor/issues",
+  "repository": "https://github.com/iam-medvedev/wheel-monitor.git",
+  "homepage": "https://github.com/iam-medvedev/wheel-monitor#readme",
+  "bugs": "https://github.com/iam-medvedev/wheel-monitor/issues",
   "license": "MIT",
   "keywords": [
     "scroll",
@@ -17,8 +17,8 @@
     "./package.json",
     "./README.md"
   ],
-  "main": "./dist/scroll-monitor.umd.js",
-  "module": "./dist/scroll-monitor.mjs",
+  "main": "./dist/wheel-monitor.umd.js",
+  "module": "./dist/wheel-monitor.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "parcel ./demo/index.html",

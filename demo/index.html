@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scroll monitor demo</title>
+    <style>
+      html,
+      body {
+        overflow: hidden;
+      }
+      h1 {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <h1>↑ scroll ↓</h1>
+    </div>
+    <script type="module">
+      import { ScrollMonitor } from '../src';
+      new ScrollMonitor();
+    </script>
+  </body>
+</html>

@@ -2,7 +2,7 @@
   "name": "wheel-monitor",
   "version": "1.0.0",
   "author": "Ilya Medvedev <ilya@medvedev.im>",
-  "description": "Scroll event monitor for debugging purposes",
+  "description": "Wheel event monitor for debugging purposes",
   "repository": "https://github.com/iam-medvedev/wheel-monitor.git",
   "homepage": "https://github.com/iam-medvedev/wheel-monitor#readme",
   "bugs": "https://github.com/iam-medvedev/wheel-monitor/issues",
@@ -23,7 +23,8 @@
   "scripts": {
     "dev": "parcel ./demo/index.html",
     "build": "NODE_ENV=production vite build",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "test": "vitest"
   },
   "devDependencies": {
     "@semantic-release/changelog": "6.0.3",
@@ -32,13 +33,16 @@
     "@semantic-release/npm": "10.0.4",
     "@semantic-release/release-notes-generator": "11.0.4",
     "@types/node": "^20.4.9",
+    "happy-dom": "^10.10.0",
     "parcel": "^2.9.3",
     "prettier": "^3.0.1",
     "rollup-plugin-uglify": "^6.0.4",
     "semantic-release": "^21.0.7",
     "typescript": "^5.1.6",
     "vite": "^4.4.9",
-    "vite-plugin-dts": "^3.5.2"
+    "vite-plugin-dts": "^3.5.2",
+    "vitest": "^0.34.1",
+    "vitest-canvas-mock": "^0.3.3"
   },
   "prettier": {
     "singleQuote": true,

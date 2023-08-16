@@ -26,7 +26,7 @@ interface WheelMonitorSettings {
 const defaults: Required<WheelMonitorSettings> = {
   manual: false,
   scale: false,
-  axis: 'x',
+  axis: 'y',
   height: 100,
   width: 200,
   zIndex: 999999,

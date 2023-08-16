@@ -4,7 +4,7 @@
 
 The Wheel Monitor is a TypeScript class that creates a visual representation of scroll activity for debugging purposes..
 
-It provides an easy way to monitor and visualize scroll events on a webpage.
+It provides an easy way to monitor and visualize wheel events on a webpage.
 
 ## Installation
 
@@ -18,6 +18,12 @@ or
 
 ```bash
 npm install --save-dev wheel-monitor
+```
+
+or
+
+```typescript
+import { WheelMonitor } from 'https://esm.sh/wheel-monitor@latest';
 ```
 
 ## Usage
@@ -42,7 +48,7 @@ monitor.destroy();
 
 ## Manual mode
 
-Ability to programmatically trigger a scroll event. For example, if you handle the scroll yourself.
+Ability to programmatically trigger a wheel event. For example, if you handle events by yourself.
 
 ```ts
 import { WheelMonitor } from 'wheel-monitor';

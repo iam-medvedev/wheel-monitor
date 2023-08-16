@@ -56,16 +56,29 @@ window.addEventListener('wheel', (e) => {
 });
 ```
 
+## Overriding styles
+
+You can override styles by using `.wheel-monitor` class name.
+
+Example:
+
+```css
+.wheel-monitor {
+  position: absolute !important;
+}
+```
+
 ## Options
 
 The WheelMonitorSettings interface provides several options to customize the appearance and behavior of the monitor:
 
 | Option            | Description                                           | Default Value |
 | ----------------- | ----------------------------------------------------- | ------------- |
-| `axis`            | The scroll axis. Default is `y`                       | `x` or `y`    |
 | `manual`          | The `manual` mode flag                                | false         |
-| `height`          | The height of the canvas in pixels.                   | `100`         |
-| `width`           | The width of the canvas in pixels.                    | `200`         |
+| `axis`            | The scroll axis. Default is `y`                       | `x` or `y`    |
+| `height`          | The height of the canvas in pixels.                   | 100           |
+| `width`           | The width of the canvas in pixels.                    | 200           |
+| `zIndex`          | The z-index of the canvas.                            | 999999        |
 | `color`           | The color of the scroll bar (CSS color value).        | `#0000cc`     |
 | `backgroundColor` | The background color of the canvas (CSS color value). | `#fff`        |
 

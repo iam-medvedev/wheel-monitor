@@ -5,18 +5,20 @@ const errorPrefix = '[wheel-monitor]:';
 type Axis = 'x' | 'y' | string;
 
 interface WheelMonitorSettings {
-  /** The height of the canvas. Default is `100px`. */
-  height?: number;
-  /** The width of the canvas. Default is `200px`. */
-  width?: number;
-  /** The color of the scroll bar. Default is `#0000cc`. */
-  color?: string;
-  /** The background color of the canvas. Default is `#fff`. */
-  backgroundColor?: string;
-  /** The `manual` mode flag. */
+  /** The `manual` mode flag. Default is false */
   manual?: boolean;
-  /** The scroll axis. Default is `y` */
+  /** The scroll axis. Default is 'y' */
   axis?: Axis;
+  /** The height of the canvas. Default is 100 */
+  height?: number;
+  /** The width of the canvas. Default is 200 */
+  width?: number;
+  /** The z-index of the canvas. Default is 999999 */
+  zIndex?: string;
+  /** The color of the scroll bar. Default is '#0000cc' */
+  color?: string;
+  /** The background color of the canvas. Default is '#fff' */
+  backgroundColor?: string;
 }
 
 export class WheelMonitor {
@@ -40,6 +42,7 @@ export class WheelMonitor {
     this.canvas.style.left = px(8);
     this.canvas.style.backgroundColor = settings.backgroundColor || '#fff';
     this.canvas.style.border = '1px solid black';
+    this.canvas.style.zIndex = String(settings.zIndex || 999999);
     this.canvas.width = settings.width || 200;
     this.canvas.height = settings.height || 100;
     this.centerY = Math.floor(this.canvas.height / 2);

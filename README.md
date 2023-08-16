@@ -56,7 +56,7 @@ window.addEventListener('wheel', (e) => {
 });
 ```
 
-## Scale
+## Scale mode
 
 You can enable scaling mode so that the values on the chart are scaled like on the demo.
 
@@ -72,7 +72,9 @@ const monitor = new WheelMonitor({
 
 ## Overriding styles
 
-You can override styles by using `.wheel-monitor` class name.
+You can add custom `className` with desired styles.
+
+NOTE: If a custom `className` is specified, the default styles will not be applied.
 
 Example:
 
@@ -82,19 +84,28 @@ Example:
 }
 ```
 
+```ts
+import { WheelMonitor } from 'wheel-monitor';
+
+const monitor = new WheelMonitor({
+  className: 'wheel-monitor',
+});
+```
+
 ## Options
 
 The WheelMonitorSettings interface provides several options to customize the appearance and behavior of the monitor:
 
-| Option            | Description                                           | Default Value |
-| ----------------- | ----------------------------------------------------- | ------------- |
-| `manual`          | The `manual` mode flag                                | false         |
-| `axis`            | The scroll axis. Default is `y`                       | `x` or `y`    |
-| `height`          | The height of the canvas in pixels.                   | 100           |
-| `width`           | The width of the canvas in pixels.                    | 200           |
-| `zIndex`          | The z-index of the canvas.                            | 999999        |
-| `color`           | The color of the scroll bar (CSS color value).        | `#0000cc`     |
-| `backgroundColor` | The background color of the canvas (CSS color value). | `#fff`        |
+| Option      | Description        | Default Value |
+| ----------- | ------------------ | ------------- |
+| `manual`    | `manual` mode flag | false         |
+| `scale`     | `scale` mode flag  | false         |
+| `axis`      | Scroll axis        | `x` or `y`    |
+| `height`    | Canvas height      | 100           |
+| `width`     | Canvas width       | 200           |
+| `zIndex`    | Canvas z-index     | 999999        |
+| `barColor`  | Chart bar color    | `#0000cc`     |
+| `className` | Custom `className` |               |
 
 ## License
 

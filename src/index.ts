@@ -5,23 +5,34 @@ const errorPrefix = '[wheel-monitor]:';
 type Axis = 'x' | 'y' | string;
 
 interface WheelMonitorSettings {
-  /** The `manual` mode flag. Default is false */
+  /** `manual` mode flag */
   manual?: boolean;
-  /** The `scale` mode flag. Default is false */
+  /** `scale` mode flag */
   scale?: boolean;
-  /** The scroll axis. Default is 'y' */
+  /** Scroll axis */
   axis?: Axis;
-  /** The height of the canvas. Default is 100 */
+  /** Canvas height */
   height?: number;
-  /** The width of the canvas. Default is 200 */
+  /** Canvas width */
   width?: number;
-  /** The z-index of the canvas. Default is 999999 */
-  zIndex?: string;
-  /** The color of the scroll bar. Default is '#0000cc' */
-  color?: string;
-  /** The background color of the canvas. Default is '#fff' */
-  backgroundColor?: string;
+  /** Canvas z-index */
+  zIndex?: number;
+  /** Chart bar color */
+  barColor?: string;
+  /** Custom `className` */
+  className?: string;
 }
+
+const defaults: Required<WheelMonitorSettings> = {
+  manual: false,
+  scale: false,
+  axis: 'x',
+  height: 100,
+  width: 200,
+  zIndex: 999999,
+  barColor: '#0000cc',
+  className: '',
+};
 
 export class WheelMonitor {
   private canvas: HTMLCanvasElement;
@@ -33,25 +44,29 @@ export class WheelMonitor {
   private axis: Axis;
   private deltas: number[] = [];
 
-  constructor(settings: WheelMonitorSettings = {}) {
+  constructor(_settings: WheelMonitorSettings = {}) {
+    const settings = { ...defaults, ..._settings };
     this.onWheel = this.onWheel.bind(this);
-    this.isManual = typeof settings.manual === 'boolean' ? settings.manual : false;
-    this.isScale = typeof settings.scale === 'boolean' ? settings.scale : false;
-    this.barColor = settings.color || '#0000cc';
-    this.axis = settings.axis || 'y';
+    this.isManual = settings.manual;
+    this.isScale = settings.scale;
+    this.barColor = settings.barColor;
+    this.axis = settings.axis;
 
     // Create a canvas element, apply styles and settings
     this.canvas = document.createElement('canvas');
-    this.canvas.style.position = 'fixed';
-    this.canvas.style.top = px(8);
-    this.canvas.style.left = px(8);
-    this.canvas.style.backgroundColor = settings.backgroundColor || '#fff';
-    this.canvas.style.border = '1px solid black';
-    this.canvas.style.zIndex = String(settings.zIndex || 999999);
+    if (settings.className) {
+      this.canvas.classList.add(settings.className);
+    } else {
+      this.canvas.style.position = 'fixed';
+      this.canvas.style.top = px(8);
+      this.canvas.style.left = px(8);
+      this.canvas.style.backgroundColor = '#fff';
+      this.canvas.style.border = '1px solid black';
+      this.canvas.style.zIndex = String(settings.zIndex || 999999);
+    }
     this.canvas.width = settings.width || 200;
     this.canvas.height = settings.height || 100;
     this.centerY = Math.floor(this.canvas.height / 2);
-    this.canvas.classList.add('wheel-monitor');
     document.body.appendChild(this.canvas);
 
     const ctx = this.canvas.getContext('2d');

@@ -26,17 +26,18 @@ interface WheelMonitorSettings {
 export class WheelMonitor {
   private canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
-  private centerY: number = 0;
-  private barColor = '#0000cc';
-  private isManual = false;
-  private isScale = false;
-  private axis: Axis = 'y';
+  private centerY: number;
+  private barColor: string;
+  private isManual: boolean;
+  private isScale: boolean;
+  private axis: Axis;
   private deltas: number[] = [];
 
   constructor(settings: WheelMonitorSettings = {}) {
     this.onWheel = this.onWheel.bind(this);
     this.isManual = typeof settings.manual === 'boolean' ? settings.manual : false;
     this.isScale = typeof settings.scale === 'boolean' ? settings.scale : false;
+    this.barColor = settings.color || '#0000cc';
     this.axis = settings.axis || 'y';
 
     // Create a canvas element, apply styles and settings

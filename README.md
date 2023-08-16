@@ -38,8 +38,9 @@ const monitor = new WheelMonitor({
   axis: 'y',
   height: 100,
   width: 200,
-  color: '#0000cc',
+  barColor '#0000cc',
   backgroundColor: '#fff',
+  className: 'custom-classname'
 });
 
 // To destroy the monitor and remove event listeners and canvas

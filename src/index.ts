@@ -7,6 +7,8 @@ type Axis = 'x' | 'y' | string;
 interface WheelMonitorSettings {
   /** The `manual` mode flag. Default is false */
   manual?: boolean;
+  /** The `scale` mode flag. Default is false */
+  scale?: boolean;
   /** The scroll axis. Default is 'y' */
   axis?: Axis;
   /** The height of the canvas. Default is 100 */
@@ -26,13 +28,15 @@ export class WheelMonitor {
   private ctx: CanvasRenderingContext2D;
   private centerY: number = 0;
   private barColor = '#0000cc';
-  private lastX: number = 0;
   private isManual = false;
+  private isScale = false;
   private axis: Axis = 'y';
+  private deltas: number[] = [];
 
   constructor(settings: WheelMonitorSettings = {}) {
     this.onWheel = this.onWheel.bind(this);
     this.isManual = typeof settings.manual === 'boolean' ? settings.manual : false;
+    this.isScale = typeof settings.scale === 'boolean' ? settings.scale : false;
     this.axis = settings.axis || 'y';
 
     // Create a canvas element, apply styles and settings
@@ -76,15 +80,41 @@ export class WheelMonitor {
   }
 
   /**
-   * Draws a bar representing the scroll movement
+   * Scales an array of values based on a canvas height
    */
-  private draw(delta: number) {
-    // Draw the bar on the canvas
-    this.ctx.fillStyle = this.barColor;
-    this.ctx.fillRect(this.lastX, this.centerY, 2, -delta);
+  private getScaledValues() {
+    const arr = this.deltas;
+    const limit = this.canvas.height;
+    const maxVal = Math.max(...arr);
+    const minVal = Math.min(...arr);
 
-    // Increment lastX and clear the canvas if necessary
-    if (this.lastX++ > this.canvas.width) {
+    if (maxVal <= limit && minVal >= -limit) {
+      // No need to scale, all values are within the limit
+      return arr;
+    }
+
+    const scaleFactor = Math.abs(limit / Math.max(Math.abs(maxVal), Math.abs(minVal)));
+    const scaledArray = arr.map((value) => value * scaleFactor);
+
+    return scaledArray;
+  }
+
+  /**
+   * Redraws a bar representing the scroll movement
+   */
+  private redraw() {
+    // Clears canvas before redraw
+    this.clear();
+
+    const values = this.isScale ? this.getScaledValues() : this.deltas;
+    for (let i = 0; i < values.length; i++) {
+      const value = values[i];
+      this.ctx.fillStyle = this.barColor;
+      this.ctx.fillRect(i, this.centerY, 2, -value);
+    }
+
+    if (values.length > this.canvas.width) {
+      this.reset();
       this.clear();
     }
   }
@@ -98,15 +128,22 @@ export class WheelMonitor {
     }
 
     const delta = this.axis === 'y' ? e.deltaY : e.deltaX;
-    this.draw(delta);
+    this.deltas.push(delta);
+    this.redraw();
   }
 
   /**
    * Clears canvas
    */
   private clear() {
-    this.lastX = 0;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  /**
+   * Resets canvas
+   */
+  private reset() {
+    this.deltas = [];
   }
 
   /**
@@ -116,7 +153,9 @@ export class WheelMonitor {
     if (!this.isManual) {
       throw new Error(`${errorPrefix} 'trigger()' works only when 'manual' mode enabled.`);
     }
-    this.draw(delta);
+
+    this.deltas.push(delta);
+    this.redraw();
   }
 
   /**

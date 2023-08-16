@@ -56,6 +56,20 @@ window.addEventListener('wheel', (e) => {
 });
 ```
 
+## Scale
+
+You can enable scaling mode so that the values on the chart are scaled like on the demo.
+
+<img width="140" src="./demo/demo-scale.gif" />
+
+```ts
+import { WheelMonitor } from 'wheel-monitor';
+
+const monitor = new WheelMonitor({
+  scale: true,
+});
+```
+
 ## Overriding styles
 
 You can override styles by using `.wheel-monitor` class name.
